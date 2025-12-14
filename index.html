@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="th" class="h-full">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ระบบห้องกลางออร์โธปิดิกส์</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    body { box-sizing: border-box; }
+
+    .gradient-bg {
+      background:
+        radial-gradient(900px circle at 15% 10%, rgba(59,130,246,0.16), transparent 55%),
+        radial-gradient(900px circle at 85% 15%, rgba(245,158,11,0.16), transparent 55%),
+        linear-gradient(135deg, #f7fbff 0%, #eef6ff 55%, #fff7ea 100%);
+    }
+
+    .card-link {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      background: linear-gradient(135deg, rgba(255,255,255,0.92), rgba(255,255,255,0.82));
+      backdrop-filter: blur(10px);
+      cursor: pointer;
+    }
+
+    .card-link::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+      transition: left 0.5s;
+    }
+
+    .card-link:hover::before { left: 100%; }
+
+    .card-link:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 22px 46px rgba(15, 23, 42, 0.14);
+    }
+
+    .logo-circle {
+      background: linear-gradient(135deg, #f59e0b 0%, #fde68a 50%, #f59e0b 100%);
+      box-shadow: 0 10px 22px rgba(245, 158, 11, 0.22);
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .animate-fade-in { animation: fadeInUp 0.6s ease-out forwards; }
+    .card-1 { animation-delay: 0.1s; }
+    .card-2 { animation-delay: 0.2s; }
+    .card-3 { animation-delay: 0.3s; }
+    .card-4 { animation-delay: 0.4s; }
+
+    /* ✅ โหมด Viewer (iframe) */
+    .viewer-shell {
+      border: 1px solid rgba(15, 23, 42, 0.10);
+      background: rgba(255,255,255,0.75);
+      backdrop-filter: blur(10px);
+    }
+  </style>
+</head>
+
+<body class="h-full w-full overflow-auto text-slate-800">
+  <div id="app-container" class="min-h-full w-full gradient-bg p-4 sm:p-8">
+
+    <!-- ===== HOME ===== -->
+    <section id="homeView" class="max-w-6xl mx-auto">
+      <div class="text-center mb-10 animate-fade-in">
+        <h1 id="page-title"
+            class="font-extrabold mb-3"
+            style="font-size: 2.4rem; color: #b45309; text-shadow: 0 2px 10px rgba(245, 158, 11, 0.25);">
+          ห้องผ่าตัดออร์โธปิดิกส์
+        </h1>
+        <p id="page-subtitle" class="text-lg text-slate-600">
+          ระบบบริหารงานห้องกลางออร์โธ
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+        <button type="button" id="card1-btn"
+          class="card-link card-1 animate-fade-in block rounded-2xl p-8 shadow-xl text-left">
+          <div class="flex flex-col items-center text-center">
+            <div class="logo-circle w-24 h-24 rounded-full flex items-center justify-center mb-6">
+              <svg class="w-12 h-12" fill="none" stroke="#111827" stroke-width="2.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+            </div>
+            <h3 id="card1-title" class="font-bold text-2xl mb-3" style="color:#b45309;">ระบบจัดการพัสดุ</h3>
+            <p id="card1-description" class="mb-6 text-slate-600">ลงทะเบียนพัสดุ</p>
+            <div class="inline-flex items-center px-6 py-3 rounded-full font-semibold"
+                 style="background: linear-gradient(135deg, #f59e0b 0%, #fde68a 50%, #f59e0b 100%); color:#111827;">
+              <span>เปิดในหน้าเดียว</span>
+              <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </div>
+          </div>
+        </button>
+
+        <button type="button" id="card2-btn"
+          class="card-link card-2 animate-fade-in block rounded-2xl p-8 shadow-xl text-left">
+          <div class="flex flex-col items-center text-center">
+            <div class="logo-circle w-24 h-24 rounded-full flex items-center justify-center mb-6">
+              <svg class="w-12 h-12" fill="none" stroke="#111827" stroke-width="2.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <h3 id="card2-title" class="font-bold text-2xl mb-3" style="color:#b45309;">ระบบลงทะเบียนImplant</h3>
+            <p id="card2-description" class="mb-6 text-slate-600">จัดการข้อมูลใบImplant</p>
+            <div class="inline-flex items-center px-6 py-3 rounded-full font-semibold"
+                 style="background: linear-gradient(135deg, #f59e0b 0%, #fde68a 50%, #f59e0b 100%); color:#111827;">
+              <span>เปิดในหน้าเดียว</span>
+              <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </div>
+          </div>
+        </button>
+
+        <button type="button" id="card3-btn"
+          class="card-link card-3 animate-fade-in block rounded-2xl p-8 shadow-xl text-left">
+          <div class="flex flex-col items-center text-center">
+            <div class="logo-circle w-24 h-24 rounded-full flex items-center justify-center mb-6">
+              <svg class="w-12 h-12" fill="none" stroke="#111827" stroke-width="2.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
+              </svg>
+            </div>
+            <h3 id="card3-title" class="font-bold text-2xl mb-3" style="color:#b45309;">ระบบเช็คของประจำวัน</h3>
+            <p id="card3-description" class="mb-6 text-slate-600">ติดตามอุปกรณ์รายวัน</p>
+            <div class="inline-flex items-center px-6 py-3 rounded-full font-semibold"
+                 style="background: linear-gradient(135deg, #f59e0b 0%, #fde68a 50%, #f59e0b 100%); color:#111827;">
+              <span>เปิดในหน้าเดียว</span>
+              <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </div>
+          </div>
+        </button>
+
+        <button type="button" id="card4-btn"
+          class="card-link card-4 animate-fade-in block rounded-2xl p-8 shadow-xl text-left">
+          <div class="flex flex-col items-center text-center">
+            <div class="logo-circle w-24 h-24 rounded-full flex items-center justify-center mb-6">
+              <svg class="w-12 h-12" fill="none" stroke="#111827" stroke-width="2.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+              </svg>
+            </div>
+            <h3 id="card4-title" class="font-bold text-2xl mb-3" style="color:#b45309;">ระบบคลัง</h3>
+            <p id="card4-description" class="mb-6 text-slate-600">จัดการสต็อกและคลัง</p>
+            <div class="inline-flex items-center px-6 py-3 rounded-full font-semibold"
+                 style="background: linear-gradient(135deg, #f59e0b 0%, #fde68a 50%, #f59e0b 100%); color:#111827;">
+              <span>เปิดในหน้าเดียว</span>
+              <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </div>
+          </div>
+        </button>
+
+      </div>
+
+      <div class="text-center mt-10 animate-fade-in" style="animation-delay: 0.5s; color: rgba(15,23,42,0.55);">
+        <p class="text-sm">🧭 คลิกที่การ์ดเพื่อเปิดระบบในหน้าเดียว</p>
+      </div>
+    </section>
+
+    <!-- ===== VIEWER ===== -->
+    <section id="viewerView" class="max-w-6xl mx-auto hidden">
+      <div class="viewer-shell rounded-2xl shadow-xl overflow-hidden">
+        <!-- Top bar -->
+        <div class="flex items-center justify-between gap-3 px-4 sm:px-6 py-3 border-b border-slate-200/70 bg-white/70">
+          <div class="min-w-0">
+            <div id="viewerTitle" class="font-bold text-slate-800 truncate">กำลังเปิด...</div>
+            <div id="viewerDesc" class="text-sm text-slate-600 truncate"></div>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <!-- เปิดแท็บใหม่ (สำรอง) -->
+            <a id="openNewTab"
+               href="#"
+               target="_blank"
+               rel="noopener noreferrer"
+               class="hidden sm:inline-flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-semibold border border-slate-200 bg-white hover:bg-slate-50">
+              เปิดแท็บใหม่
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M14 3h7v7m0-7L10 14m-4 7h7a2 2 0 002-2v-7a2 2 0 00-2-2H6a2 2 0 00-2 2v7a2 2 0 002 2z"/>
+              </svg>
+            </a>
+
+            <!-- ✅ ปุ่มกลับ Home -->
+            <button id="btnBackHome"
+              class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-bold"
+              style="background: linear-gradient(135deg, #f59e0b 0%, #fde68a 50%, #f59e0b 100%); color:#111827;">
+              กลับ Home
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- iframe area -->
+        <div class="bg-white">
+          <div id="iframeHint" class="hidden px-4 sm:px-6 py-3 text-sm text-amber-800 bg-amber-50 border-b border-amber-200">
+            ⚠️ เว็บปลายทางอาจไม่อนุญาตให้เปิดใน iframe หากหน้าไม่แสดง ให้กด “เปิดแท็บใหม่”
+          </div>
+
+          <iframe id="appFrame"
+            title="Connected App"
+            class="w-full"
+            style="height: calc(100vh - 180px); border: 0;"
+            src="about:blank"></iframe>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    const defaultConfig = {
+      page_title: "ห้องผ่าตัดออร์โธปิดิกส์",
+      page_subtitle: "ระบบบริหารงานห้องกลางออร์โธ",
+
+      card1_title: "ระบบจัดการพัสดุ",
+      card1_description: "ลงทะเบียนพัสดุ",
+      card1_url: "https://orbahofficial-code.github.io/OORMS/",
+
+      card2_title: "ระบบลงทะเบียนImplant",
+      card2_description: "จัดการข้อมูลใบImplant",
+      card2_url: "https://accounting.example.com",
+
+      card3_title: "ระบบเช็คของประจำวัน",
+      card3_description: "ติดตามอุปกรณ์รายวัน",
+      card3_url: "https://shipping.example.com",
+
+      card4_title: "ระบบคลัง",
+      card4_description: "จัดการสต็อกและคลัง",
+      card4_url: "https://warehouse.example.com"
+    };
+
+    // ---------- UI Helpers ----------
+    const homeView = document.getElementById("homeView");
+    const viewerView = document.getElementById("viewerView");
+    const appFrame = document.getElementById("appFrame");
+    const viewerTitle = document.getElementById("viewerTitle");
+    const viewerDesc = document.getElementById("viewerDesc");
+    const openNewTab = document.getElementById("openNewTab");
+    const iframeHint = document.getElementById("iframeHint");
+
+    function showHome(pushState = true) {
+      appFrame.src = "about:blank";
+      viewerView.classList.add("hidden");
+      homeView.classList.remove("hidden");
+      if (pushState) history.pushState({ view: "home" }, "", "#home");
+    }
+
+    function openInViewer({ title, desc, url }, pushState = true) {
+      viewerTitle.textContent = title || "กำลังเปิด...";
+      viewerDesc.textContent = desc || "";
+      openNewTab.href = url || "#";
+
+      // hint แสดงไว้ก่อน (บางเว็บ embed ไม่ได้)
+      iframeHint.classList.remove("hidden");
+
+      // เปิดใน iframe
+      appFrame.src = url || "about:blank";
+
+      homeView.classList.add("hidden");
+      viewerView.classList.remove("hidden");
+
+      if (pushState) history.pushState({ view: "viewer", url }, "", "#viewer");
+    }
+
+    function applyConfig(cfg) {
+      const c = { ...defaultConfig, ...(cfg || {}) };
+
+      document.getElementById("page-title").textContent = c.page_title;
+      document.getElementById("page-subtitle").textContent = c.page_subtitle;
+
+      document.getElementById("card1-title").textContent = c.card1_title;
+      document.getElementById("card1-description").textContent = c.card1_description;
+
+      document.getElementById("card2-title").textContent = c.card2_title;
+      document.getElementById("card2-description").textContent = c.card2_description;
+
+      document.getElementById("card3-title").textContent = c.card3_title;
+      document.getElementById("card3-description").textContent = c.card3_description;
+
+      document.getElementById("card4-title").textContent = c.card4_title;
+      document.getElementById("card4-description").textContent = c.card4_description;
+
+      // bind clicks
+      document.getElementById("card1-btn").onclick = () => openInViewer({
+        title: c.card1_title, desc: c.card1_description, url: c.card1_url
+      });
+
+      document.getElementById("card2-btn").onclick = () => openInViewer({
+        title: c.card2_title, desc: c.card2_description, url: c.card2_url
+      });
+
+      document.getElementById("card3-btn").onclick = () => openInViewer({
+        title: c.card3_title, desc: c.card3_description, url: c.card3_url
+      });
+
+      document.getElementById("card4-btn").onclick = () => openInViewer({
+        title: c.card4_title, desc: c.card4_description, url: c.card4_url
+      });
+    }
+
+    // Back button
+    document.getElementById("btnBackHome").addEventListener("click", () => showHome(true));
+
+    // Handle browser back/forward
+    window.addEventListener("popstate", (e) => {
+      const s = (e && e.state) ? e.state : null;
+      if (!s || s.view === "home") {
+        showHome(false);
+      } else if (s.view === "viewer") {
+        // เปิด viewer ด้วย url เดิม (title/desc ไม่รู้แล้ว ใช้ค่าที่มี)
+        openInViewer({ title: "ระบบที่เชื่อมต่อ", desc: "", url: s.url }, false);
+      }
+    });
+
+    // init
+    applyConfig(defaultConfig);
+
+    // ถ้าเปิดด้วย #viewer/#home
+    if (location.hash === "#viewer") {
+      // ยังไม่รู้ url จาก hash เลยกลับ home
+      showHome(false);
+    } else {
+      history.replaceState({ view: "home" }, "", "#home");
+    }
+  </script>
+</body>
+</html>
